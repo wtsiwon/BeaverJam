@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-
+using UnityEngine.UI;
 public enum ESoundType 
 {
     BGM,
@@ -14,16 +14,40 @@ public enum ESoundType
 public class SoundManager : Singleton<SoundManager>
 {
     [AssetList]
-    private List<AudioClip> sound = new List<AudioClip>();
+    [SerializeField] private List<AudioClip> sound = new List<AudioClip>();
 
     public bool bgmON;
     public bool sfxON;
 
+    public AudioSource bgm;
+
+
+    private void Start()
+    {
+        foreach(Button btn in Resources.FindObjectsOfTypeAll<Button>())
+        {
+            btn.onClick.AddListener(() => PlaySound(ESoundType.BUTTON));
+        }
+
+        PlaySound(ESoundType.BGM);
+    }
     public void PlaySound(ESoundType type)
     {
         if (type == ESoundType.BGM && bgmON == false) return;
         else if (type != ESoundType.BGM && sfxON == false) return;
 
+        GameObject go = new GameObject("sound");
 
+        AudioSource audio = go.AddComponent<AudioSource>();
+        audio.clip = sound[((int)type)];
+
+        if (type == ESoundType.BGM)
+        {
+            bgm = audio;
+            audio.loop = true;
+            audio.volume = 0.5f;
+        }
+        audio.Play();
+        if (type != ESoundType.BGM) Destroy(go, audio.clip.length);
     }
 }

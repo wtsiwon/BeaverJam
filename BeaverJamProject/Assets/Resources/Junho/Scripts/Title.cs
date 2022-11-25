@@ -78,11 +78,13 @@ public class Title : Singleton<Title>
         {
             sm.bgmON = false;
             bgmTxt.text = "BGM : OFF";
+            Destroy(SoundManager.Instance.bgm);
         }
         else
         {
             sm.bgmON = true;
             bgmTxt.text = "BGM : ON";
+            SoundManager.Instance.PlaySound(ESoundType.BGM);
         }
     }
     public void SfxOnBtn()
