@@ -19,9 +19,14 @@ public class Title : MonoBehaviour
     [SerializeField] private TextMeshProUGUI bgmTxt;
     [SerializeField] private TextMeshProUGUI sfxTxt;
 
+    [SerializeField] private GameObject pauseWnd;
+    private bool isPause;
+
+    [SerializeField] private GameObject ingameWnd;
     void Start()
     {
         isSetOn = false;
+        isPause = false;
 
         cameraObjs.transform.position = startCameraPos;
         fadeTxt.DOFade(0f, 0.8f).SetLoops(-1, LoopType.Yoyo);
@@ -29,6 +34,7 @@ public class Title : MonoBehaviour
 
     public void GoTitle()
     {
+        ingameWnd.SetActive(false);
         TitleWnd.SetActive(true);
         cameraObjs.transform.DOMove(startCameraPos, 0.5f);
         cameraObjs.transform.DORotate(new Vector3(45, 0, 0), 0.5f);
@@ -40,6 +46,7 @@ public class Title : MonoBehaviour
         cameraObjs.transform.DORotate(new Vector3(20, 0, 0), 0.5f).OnComplete(() =>
         {
             GameManager.Instance.StartSetting();
+            ingameWnd.SetActive(true);
         });
 
     }
@@ -75,5 +82,20 @@ public class Title : MonoBehaviour
             sm.sfxON = true;
             sfxTxt.text = "SFX : ON";
         }
+    }
+
+    public void PauseOnBtn()
+    {
+        if (isPause == false)
+        {
+            isPause = true;
+            Time.timeScale = 0;
+        }
+        else
+        {
+            isPause = false;
+            Time.timeScale = 1;
+        }
+        pauseWnd.SetActive(isPause);
     }
 }

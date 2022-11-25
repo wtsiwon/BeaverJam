@@ -84,8 +84,15 @@ public class Spawner : Singleton<Spawner>
         //0ÀÏ¶§ 1Ä­ Àå¾Ö¹° , 1 ÀÏ¶§ 2Ä­ 
         int ran = Random.Range(0, 2);
         bool isOneBlock = (ran == 0)? true : false;
+        if(isOneBlock == false)
+        {
+            //¿Þ ¿À ÀÎÁö ·£´ý Ã¼Å©
+            int ranNum = Random.Range(0, 2);
 
-        ObjPop(isOneBlock, spPos[Random.Range(0,objs.Count)]);
+            if (ranNum == 0) ObjPop(isOneBlock, spPos[ranNum]);
+            else ObjPop(isOneBlock, spPos[ranNum + 1]);
+        }
+        else ObjPop(isOneBlock, spPos[Random.Range(0,objs.Count)]);
         yield return new WaitForSeconds(maxCnt);
         GameManager.Instance.spCoroutine = StartCoroutine(Spawn());
     }
