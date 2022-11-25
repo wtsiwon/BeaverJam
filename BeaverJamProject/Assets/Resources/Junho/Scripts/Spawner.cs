@@ -70,22 +70,23 @@ public class Spawner : Singleton<Spawner>
         {
             int ranNum = Random.Range(0, oneBlock.Count);
 
-            if (oneBlock.Count != 0)
-                obj = oneBlock[ranNum];
+            if (oneBlock.Count != 0) obj = oneBlock[ranNum];
             else obj = CreateObj(isOne, ranNum);
+            oneBlock.Remove(obj);
         }
         else
         {
             int ranNum = Random.Range(0, twoBlock.Count);
+
             if (twoBlock.Count != 0) obj = twoBlock[ranNum];
             else obj = CreateObj(isOne, ranNum);
+            twoBlock.Remove(obj);
         }
         spawnObjs.Add(obj);
 
         obj.SetActive(true);
         obj.transform.parent = null;
         obj.transform.position = pos.position;
-        oneBlock.Remove(obj);
     }
     public void ObjPush(GameObject obstacle)
     {
@@ -93,15 +94,6 @@ public class Spawner : Singleton<Spawner>
         if (obj.isOneBlock) oneBlock.Add(obj.gameObject);
         else twoBlock.Add(obj.gameObject);
 
-        print("Gang");
-        foreach (var item in spawnObjs)
-        {
-            if (item == obj.gameObject)
-            {
-                spawnObjs.Remove(item);
-                break;
-            }
-        }
         obj.transform.parent = objFolder.transform;
         obj.transform.position = Vector3.zero;
         obj.gameObject.SetActive(false);
@@ -116,20 +108,21 @@ public class Spawner : Singleton<Spawner>
             //¿Þ ¿À ÀÎÁö ·£´ý Ã¼Å©
             int ranNum = Random.Range(0, 2);
 
-            if (ranNum == 0) ObjPop(isOneBlock, spPos[ranNum]);
-            else ObjPop(isOneBlock, spPos[ranNum + 1]);
+            if (ranNum == 0) ObjPop(isOneBlock, spPos[0]);
+            else ObjPop(isOneBlock, spPos[2]);
         }
         else ObjPop(isOneBlock, spPos[Random.Range(0,objs.Count)]);
         yield return new WaitForSeconds(maxCnt);
-        GameManager.Instance.spCoroutine = StartCoroutine(Spawn());
+        GameManager.Instance.spCoroutine = this.StartCoroutine(nameof(Spawner.Instance.Spawn));
     }
 
     public void Clear()
     {
-        print("cl");
         foreach (var item in spawnObjs)
         {
             ObjPush(item);
         }
+
+        spawnObjs.Clear();
     }
 }
