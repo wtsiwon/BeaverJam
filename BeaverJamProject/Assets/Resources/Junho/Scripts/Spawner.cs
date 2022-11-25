@@ -17,6 +17,8 @@ public class Spawner : Singleton<Spawner>
     private List<GameObject> twoBlock = new List<GameObject>();
 
     [SerializeField] private Transform[] spPos = new Transform[3];
+
+    [SerializeField] private List<GameObject> spawnObjs = new List<GameObject>();
     private void Start()
     {
         for (int i = 0; i < objs.Count; i++)
@@ -26,13 +28,19 @@ public class Spawner : Singleton<Spawner>
                 GameObject go = Instantiate(objs[i]).gameObject;
                 go.transform.parent = objFolder.transform;
 
-                if (objs[i].isOneBlock) oneBlock.Add(go);
-                else twoBlock.Add(go);
+                if (objs[i].isOneBlock)
+                {
+                    go.name = "OneBlock";
+                    oneBlock.Add(go);
+                }
+                else
+                {
+                    go.name = "TwoBlock";
+                    twoBlock.Add(go);
+                }
                 go.SetActive(false);
             }
         }
-
-        StartCoroutine(Spawn());
     }
 
     private GameObject CreateObj(bool isOne, int objNum)
@@ -40,8 +48,16 @@ public class Spawner : Singleton<Spawner>
         GameObject obj = Instantiate(objs[objNum].gameObject);
         obj.transform.parent = objFolder.transform;
 
-        if(isOne) oneBlock.Add(obj);
-        else twoBlock.Add(obj);
+        if (isOne)
+        {
+            obj.name = "OneBlock";
+            oneBlock.Add(obj);
+        }
+        else
+        {
+            obj.name = "TwoBlock";
+            twoBlock.Add(obj);
+        }
 
         obj.SetActive(false);
 
@@ -64,6 +80,8 @@ public class Spawner : Singleton<Spawner>
             if (twoBlock.Count != 0) obj = twoBlock[ranNum];
             else obj = CreateObj(isOne, ranNum);
         }
+        spawnObjs.Add(obj);
+
         obj.SetActive(true);
         obj.transform.parent = null;
         obj.transform.position = pos.position;
@@ -74,6 +92,11 @@ public class Spawner : Singleton<Spawner>
         Obstacle obj = obstacle.GetComponent<Obstacle>();
         if (obj.isOneBlock) oneBlock.Add(obj.gameObject);
         else twoBlock.Add(obj.gameObject);
+
+        foreach (var item in spawnObjs)
+        {
+            if (item == obstacle.gameObject) spawnObjs.Remove(item);
+        }
 
         obj.transform.parent = objFolder.transform;
         obj.transform.position = Vector3.zero;
@@ -97,4 +120,11 @@ public class Spawner : Singleton<Spawner>
         GameManager.Instance.spCoroutine = StartCoroutine(Spawn());
     }
 
+    public void Clear()
+    {
+        foreach (var item in spawnObjs)
+        {
+            ObjPush(item);
+        }
+    }
 }

@@ -34,6 +34,11 @@ public class Title : MonoBehaviour
 
     public void GoTitle()
     {
+        if (isPause == true)
+        {
+            PauseOnBtn();
+        }
+
         ingameWnd.SetActive(false);
         TitleWnd.SetActive(true);
         cameraObjs.transform.DOMove(startCameraPos, 0.5f);
@@ -41,6 +46,12 @@ public class Title : MonoBehaviour
     }
     public void StartBtn()
     {
+        if (isPause == true)
+        {
+            PauseOnBtn();
+            GameManager.Instance.GameOver();
+        }
+
         TitleWnd.SetActive(false);
         cameraObjs.transform.DOMove(inGameCameraPos, 0.5f);
         cameraObjs.transform.DORotate(new Vector3(20, 0, 0), 0.5f).OnComplete(() =>
