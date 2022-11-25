@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
-public class Title : MonoBehaviour
+public class Title : Singleton<Title>
 {
     [SerializeField] private TextMeshProUGUI fadeTxt;
     [SerializeField] private GameObject TitleWnd;
@@ -39,7 +39,7 @@ public class Title : MonoBehaviour
             PauseOnBtn();
         }
 
-        if (GameManager.Instance.spCoroutine != null) StopCoroutine(GameManager.Instance.spCoroutine);
+        if (GameManager.Instance.spCoroutine != null) StopCoroutine(nameof(Spawner.Instance.Spawn));
         Spawner.Instance.Clear();
 
         ingameWnd.SetActive(false);
@@ -52,10 +52,9 @@ public class Title : MonoBehaviour
         if (isPause == true)
         {
             PauseOnBtn();
-            GameManager.Instance.GameOver();
-            if (GameManager.Instance.spCoroutine != null) StopCoroutine(GameManager.Instance.spCoroutine);
-            Spawner.Instance.Clear();
         }
+        if (GameManager.Instance.spCoroutine != null) StopCoroutine(nameof(Spawner.Instance.Spawn));
+        Spawner.Instance.Clear();
 
         TitleWnd.SetActive(false);
         cameraObjs.transform.DOMove(inGameCameraPos, 0.5f);
