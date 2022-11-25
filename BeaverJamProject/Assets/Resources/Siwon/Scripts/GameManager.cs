@@ -6,23 +6,19 @@ public class GameManager : Singleton<GameManager>
 {
     public float point;
 
-    public bool isGameStart;
 
     public Coroutine spCoroutine;
-    private void Start()
-    {
-        isGameStart = false;
-    }
-
     public void StartSetting()
     {
-        isGameStart = true;
+        if(spCoroutine != null) StopCoroutine(spCoroutine);
+
+        Spawner.Instance.Clear();
         spCoroutine = StartCoroutine(Spawner.Instance.Spawn());
     }
 
     public void GameOver()
     {
-        isGameStart = false;
         StopCoroutine(spCoroutine);
+        Spawner.Instance.Clear();
     }
 }
