@@ -36,18 +36,19 @@ public class Player : MonoBehaviour
         set
         {
             isBooster = value;
-            if(isBooster == true)
-            {
-
-            }
         }
     }
 
     private void Update()
     {
+        
+    }
+
+    private void InputKey()
+    {
         if (Input.GetKeyDown(KeyCode.LeftArrow) && PosIndex != 0)
         {
-            PosIndex -= 1; 
+            PosIndex -= 1;
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow) && PosIndex != 2)
         {
@@ -56,13 +57,17 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && gauge > 99)
         {
-
+            Ultimate();
+            
         }
     }
 
     private void SetBooter()
     {
-
+        if(IsBooster == true)
+        {
+            GameManager.Instance.movingElementSpd = GameManager.Instance.boostingSpd;
+        }
     }
 
     private void Ultimate()
@@ -73,8 +78,10 @@ public class Player : MonoBehaviour
     private IEnumerator CUltimate()
     {
         IsBooster = true;
-
+        gauge = 0;
         yield return new WaitForSeconds(1f);
+
+        IsBooster = false;
 
     }
 }
