@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 
 public enum EPlayerStat
 {
@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
         set
         {
             posIndex = value;
-            transform.position = pos[posIndex];
+            transform.DOMove(pos[posIndex],0.2f);
         }
     }
 
@@ -41,7 +41,10 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        
+        gauge += Time.deltaTime;
+        Mathf.Clamp(gauge, 0, 100);
+
+        InputKey();
     }
 
     private void InputKey()
@@ -55,10 +58,9 @@ public class Player : MonoBehaviour
             PosIndex += 1;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && gauge > 99)
+        if (Input.GetKeyDown(KeyCode.Space) && gauge > 99 && isBooster == false)
         {
             Ultimate();
-            
         }
     }
 
@@ -78,9 +80,9 @@ public class Player : MonoBehaviour
     private IEnumerator CUltimate()
     {
         IsBooster = true;
-        gauge = 0;
         yield return new WaitForSeconds(1f);
 
+        gauge = 0;
         IsBooster = false;
 
     }

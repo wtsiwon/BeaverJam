@@ -38,7 +38,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            IsPauseBoard = !IsPauseBoard;
+            Title.Instance.PauseOnBtn();
         }
     }
 
