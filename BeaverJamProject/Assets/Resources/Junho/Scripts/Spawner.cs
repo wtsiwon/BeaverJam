@@ -93,11 +93,15 @@ public class Spawner : Singleton<Spawner>
         if (obj.isOneBlock) oneBlock.Add(obj.gameObject);
         else twoBlock.Add(obj.gameObject);
 
+        print("Gang");
         foreach (var item in spawnObjs)
         {
-            if (item == obstacle.gameObject) spawnObjs.Remove(item);
+            if (item == obj.gameObject)
+            {
+                spawnObjs.Remove(item);
+                break;
+            }
         }
-
         obj.transform.parent = objFolder.transform;
         obj.transform.position = Vector3.zero;
         obj.gameObject.SetActive(false);
@@ -122,6 +126,7 @@ public class Spawner : Singleton<Spawner>
 
     public void Clear()
     {
+        print("cl");
         foreach (var item in spawnObjs)
         {
             ObjPush(item);

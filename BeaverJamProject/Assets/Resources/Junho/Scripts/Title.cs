@@ -19,7 +19,7 @@ public class Title : MonoBehaviour
     [SerializeField] private TextMeshProUGUI bgmTxt;
     [SerializeField] private TextMeshProUGUI sfxTxt;
 
-    [SerializeField] private GameObject pauseWnd;
+    public GameObject pauseWnd;
     private bool isPause;
 
     [SerializeField] private GameObject ingameWnd;
@@ -39,6 +39,9 @@ public class Title : MonoBehaviour
             PauseOnBtn();
         }
 
+        if (GameManager.Instance.spCoroutine != null) StopCoroutine(GameManager.Instance.spCoroutine);
+        Spawner.Instance.Clear();
+
         ingameWnd.SetActive(false);
         TitleWnd.SetActive(true);
         cameraObjs.transform.DOMove(startCameraPos, 0.5f);
@@ -50,6 +53,8 @@ public class Title : MonoBehaviour
         {
             PauseOnBtn();
             GameManager.Instance.GameOver();
+            if (GameManager.Instance.spCoroutine != null) StopCoroutine(GameManager.Instance.spCoroutine);
+            Spawner.Instance.Clear();
         }
 
         TitleWnd.SetActive(false);
