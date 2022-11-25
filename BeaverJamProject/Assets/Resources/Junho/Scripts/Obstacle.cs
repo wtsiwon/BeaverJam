@@ -10,6 +10,13 @@ public class Obstacle : VeticalMove
         // ºÎ¼ÅÁü
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("MapEndPos"))
+        {
+            Spawner.instance.ObjPush(gameObject);
+        }
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("Player"))

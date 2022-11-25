@@ -8,6 +8,6 @@ public abstract class VeticalMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rb.velocity += Vector3.forward * Time.deltaTime;   
+        rb.transform.position += Vector3.back * Time.deltaTime;   
     }
 }

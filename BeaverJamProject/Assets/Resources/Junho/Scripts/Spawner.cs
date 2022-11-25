@@ -6,9 +6,8 @@ using Sirenix.OdinInspector;
 public class Spawner : MonoBehaviour
 {
     [AssetList]
-    private List<Obstacle> objs = new List<Obstacle>();
+    [SerializeField] private List<Obstacle> objs = new List<Obstacle>();
 
-    public float cnt;
     public float maxCnt;
 
     [SerializeField] private GameObject objFolder;
@@ -18,26 +17,60 @@ public class Spawner : MonoBehaviour
     private List<GameObject> twoBlock = new List<GameObject>();
 
     [SerializeField] private Transform[] spPos = new Transform[3];
+    public Coroutine spCoroutine;
 
-
+    public static Spawner instance;
+    private void Awake()
+    {
+        instance = this;
+    }
     private void Start()
     {
         for (int i = 0; i < objs.Count; i++)
         {
-            GameObject go = Instantiate(objs[i]).gameObject;
-            go.transform.parent = objFolder.transform;
+            for (int j = 0; j < 5; j++)
+            {
+                GameObject go = Instantiate(objs[i]).gameObject;
+                go.transform.parent = objFolder.transform;
 
-            if (objs[i].isOneBlock) oneBlock.Add(go);
-            else twoBlock.Add(go);
-            go.SetActive(false);
-        }        
+                if (objs[i].isOneBlock) oneBlock.Add(go);
+                else twoBlock.Add(go);
+                go.SetActive(false);
+            }
+        }
+
+        StartCoroutine(Spawn());
     }
 
+    private GameObject CreateObj(bool isOne, int objNum)
+    {
+        GameObject obj = Instantiate(objs[objNum].gameObject);
+        obj.transform.parent = objFolder.transform;
+
+        if(isOne) oneBlock.Add(obj);
+        else twoBlock.Add(obj);
+
+        obj.SetActive(false);
+
+        return obj;
+    }
     private void ObjPop(bool isOne, Transform pos)
     {
         GameObject obj;
-        if (isOne) obj = oneBlock[Random.Range(0, oneBlock.Count)];
-        else obj = twoBlock[Random.Range(0, twoBlock.Count)];
+        if (isOne)
+        {
+            int ranNum = Random.Range(0, oneBlock.Count);
+
+            if (oneBlock.Count != 0)
+                obj = oneBlock[ranNum];
+            else obj = CreateObj(isOne, ranNum);
+        }
+        else
+        {
+            int ranNum = Random.Range(0, twoBlock.Count);
+            if (twoBlock.Count != 0) obj = twoBlock[ranNum];
+            else obj = CreateObj(isOne, ranNum);
+        }
         obj.SetActive(true);
         obj.transform.parent = null;
         obj.transform.position = pos.position;
@@ -53,23 +86,15 @@ public class Spawner : MonoBehaviour
         obj.transform.position = Vector3.zero;
         obj.gameObject.SetActive(false);
     }
-    private void Update()
-    {
-        cnt += Time.deltaTime;
-        if (cnt > maxCnt)
-        {
-            cnt = 0;
-            Spawn();
-        }
-    }
-
-    private void Spawn()
+    private IEnumerator Spawn()
     {
         //0ÀÏ¶§ 1Ä­ Àå¾Ö¹° , 1 ÀÏ¶§ 2Ä­ 
         int ran = Random.Range(0, 2);
         bool isOneBlock = (ran == 0)? true : false;
 
-        ObjPop(isOneBlock, spPos[Random.Range(0,3)]);
+        ObjPop(isOneBlock, spPos[Random.Range(0,objs.Count)]);
+        yield return new WaitForSeconds(maxCnt);
+        spCoroutine = StartCoroutine(Spawn());
     }
 
 }

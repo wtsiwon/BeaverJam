@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Map : ScrollMap
+public class Map : VeticalMove
 {
-    private Transform startPos;
-    private void OnCollisionEnter(Collision collision)
+    [SerializeField] private Transform startPos;
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.collider.CompareTag("MapEndPos"))
+        
+        if (other.CompareTag("MapEndPos"))
         {
             transform.position = startPos.position;
         }
