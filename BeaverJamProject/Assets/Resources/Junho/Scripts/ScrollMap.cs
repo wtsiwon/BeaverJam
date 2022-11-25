@@ -8,9 +8,9 @@ public class ScrollMap : MonoBehaviour
     [SerializeField] private GameObject[] mapObjs;
     [SerializeField] float skyRotate;
 
-    private void Update()
+    private void FixedUpdate()
     {
-        skyRotate += Time.deltaTime /*/ 360*/;
+        skyRotate += Time.deltaTime;
         if (skyRotate >= 360)
         {
             skyRotate = 0;

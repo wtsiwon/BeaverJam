@@ -14,7 +14,7 @@ public class Obstacle : VeticalMove
     {
         if (other.CompareTag("MapEndPos"))
         {
-            Spawner.instance.ObjPush(gameObject);
+            Spawner.Instance.ObjPush(gameObject);
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -25,6 +25,9 @@ public class Obstacle : VeticalMove
             //{
             //    case Basic:
             //        Die
+            //        break;
+            //    defalut : 
+            //        Broken();
             //        break;
             //}
         }

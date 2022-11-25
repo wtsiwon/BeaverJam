@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class Spawner : MonoBehaviour
+public class Spawner : Singleton<Spawner>
 {
     [AssetList]
     [SerializeField] private List<Obstacle> objs = new List<Obstacle>();
@@ -17,13 +17,6 @@ public class Spawner : MonoBehaviour
     private List<GameObject> twoBlock = new List<GameObject>();
 
     [SerializeField] private Transform[] spPos = new Transform[3];
-    public Coroutine spCoroutine;
-
-    public static Spawner instance;
-    private void Awake()
-    {
-        instance = this;
-    }
     private void Start()
     {
         for (int i = 0; i < objs.Count; i++)
@@ -86,7 +79,7 @@ public class Spawner : MonoBehaviour
         obj.transform.position = Vector3.zero;
         obj.gameObject.SetActive(false);
     }
-    private IEnumerator Spawn()
+    public IEnumerator Spawn()
     {
         //0ÀÏ¶§ 1Ä­ Àå¾Ö¹° , 1 ÀÏ¶§ 2Ä­ 
         int ran = Random.Range(0, 2);
@@ -94,7 +87,7 @@ public class Spawner : MonoBehaviour
 
         ObjPop(isOneBlock, spPos[Random.Range(0,objs.Count)]);
         yield return new WaitForSeconds(maxCnt);
-        spCoroutine = StartCoroutine(Spawn());
+        GameManager.Instance.spCoroutine = StartCoroutine(Spawn());
     }
 
 }
