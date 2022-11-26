@@ -17,7 +17,18 @@ public class GameManager : Singleton<GameManager>
             UIManager.Instance.scoreText.text = score.ToString();
         }
     }
-
+    private float hScore;
+    public float HScore
+    {
+        get
+        {
+            return hScore;
+        }
+        set
+        {
+            hScore = value;
+        }
+    }
     public Coroutine spCoroutine;
     public bool isGameStart;
 
@@ -27,7 +38,7 @@ public class GameManager : Singleton<GameManager>
     [Tooltip("ºÎ½ºÆÃ Spd")]
     public float boostingSpd;
 
-    public const float STARTSPD = 300f;
+    public const float STARTSPD = 2000f;
 
     public GameObject pauseBoard;
 
@@ -56,10 +67,10 @@ public class GameManager : Singleton<GameManager>
             Score += movingElementSpd / 100;
             if (isGameStart == true)
             {
-                if(Player.Instance.IsBooster == false && Score <= 2000)
+                if(Player.Instance.IsBooster == false && Score <= 20000)
                 {
                     movingElementSpd = STARTSPD + Score / 5;
-                    Mathf.Clamp(movingElementSpd, 200f, 600f);
+                    Mathf.Clamp(movingElementSpd, 2000f, 6000f);
                 }
             }
 
@@ -76,7 +87,7 @@ public class GameManager : Singleton<GameManager>
 
     public void StartSetting()
     {
-        if (spCoroutine != null) StopCoroutine(spCoroutine);
+        if (spCoroutine != null) StopCoroutine(nameof(Spawner.Instance.Spawn));
 
         Spawner.Instance.Clear();
         spCoroutine = Spawner.Instance.StartCoroutine(nameof(Spawner.Instance.Spawn));
@@ -86,8 +97,9 @@ public class GameManager : Singleton<GameManager>
 
     public void GameOver()
     {
-        StopCoroutine(spCoroutine);
+        StopCoroutine(nameof(Spawner.Instance.Spawn));
         Spawner.Instance.Clear();
         isGameStart = false;
+        UIManager.Instance.GoTitle();
     }
 }

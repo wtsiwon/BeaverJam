@@ -81,8 +81,8 @@ public class Spawner : Singleton<Spawner>
             if (twoBlock.Count != 0) obj = twoBlock[ranNum];
             else obj = CreateObj(isOne, ranNum);
             twoBlock.Remove(obj);
-            if(pos == spPos[0]) obj.transform.rotation = Quaternion.Euler(0,0,0);
-            else obj.transform.rotation = Quaternion.Euler(0,180,0);
+            if(pos == spPos[0]) obj.transform.rotation = Quaternion.Euler(130,0,0);
+            else obj.transform.rotation = Quaternion.Euler(-130,180,0);
         }
         spawnObjs.Add(obj);
 

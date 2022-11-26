@@ -879,7 +879,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &469600907
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1390,6 +1390,8 @@ MonoBehaviour:
   pauseWnd: {fileID: 197388110}
   ingameWnd: {fileID: 760818851}
   scoreText: {fileID: 1845046025}
+  titleScoreTxt: {fileID: 1227527750}
+  titleHighScoreTxt: {fileID: 1425903840}
 --- !u!1 &645743141
 GameObject:
   m_ObjectHideFlags: 0
@@ -3043,7 +3045,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: -150, y: -75}
-  m_SizeDelta: {x: 400, y: 150}
+  m_SizeDelta: {x: 600, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1227527751
 CanvasRenderer:
@@ -3100,8 +3102,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 120
-  m_fontSizeBase: 120
+  m_fontSize: 80
+  m_fontSizeBase: 80
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3550,7 +3552,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 150, y: -75}
-  m_SizeDelta: {x: 400, y: 150}
+  m_SizeDelta: {x: 600, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1425903841
 CanvasRenderer:
@@ -3607,8 +3609,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 120
-  m_fontSizeBase: 120
+  m_fontSize: 80
+  m_fontSizeBase: 80
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

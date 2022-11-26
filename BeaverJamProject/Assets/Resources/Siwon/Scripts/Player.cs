@@ -3,12 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
-
-public enum EPlayerStat
-{
-    None,
-    Booster,
-}
 public class Player : Singleton<Player>
 {
     [SerializeField]
@@ -85,7 +79,6 @@ public class Player : Singleton<Player>
         {
             PosIndex += 1;
         }
-
         if (Input.GetKeyDown(KeyCode.Space) && gauge > 99 && isBooster == false)
         {
             Ultimate();
