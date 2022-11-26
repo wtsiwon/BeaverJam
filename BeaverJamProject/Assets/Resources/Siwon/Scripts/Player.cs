@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using TMPro;
 
 public enum EPlayerStat
 {
     None,
     Booster,
 }
-public class Player : MonoBehaviour
+public class Player : Singleton<Player>
 {
     [SerializeField]
     private int posIndex;
@@ -24,12 +25,24 @@ public class Player : MonoBehaviour
 
     public Vector3[] pos;
 
-    public float gauge;
+    private float _gauge;
+    public float gauge
+    {
+        get { return _gauge; }
+        set
+        {
+            _gauge = value;
+            ultGaugeText.text = _gauge.ToString("F0");
+        }
+    }
 
     public float ultDuration;
 
-    private bool isBooster;
+    [SerializeField]
+    [Tooltip("±Ã±Ø±â °ÔÀÌÁö")]
+    private TextMeshProUGUI ultGaugeText;
 
+    private bool isBooster;
     public bool IsBooster
     {
         get => isBooster;
@@ -39,6 +52,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        
+    }
+
     private void Update()
     {
         gauge += Time.deltaTime;
@@ -46,6 +64,8 @@ public class Player : MonoBehaviour
 
         InputKey();
     }
+
+    
 
     private void InputKey()
     {
@@ -80,9 +100,10 @@ public class Player : MonoBehaviour
     private IEnumerator CUltimate()
     {
         IsBooster = true;
-        yield return new WaitForSeconds(1f);
-
         gauge = 0;
+
+        yield return new WaitForSeconds(ultDuration);
+
         IsBooster = false;
 
     }

@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    public float point;
-
+    public float score;
 
     public Coroutine spCoroutine;
     public bool isGameStart;
 
-    [Tooltip("??????? ???Spd: ???, ??????")]
+    [Tooltip("움직이는 요소 Spd")]
     public float movingElementSpd;
 
-    [Tooltip("?ν??? Spd")]
+    [Tooltip("부스팅 Spd")]
     public float boostingSpd;
+
+    public const float STARTSPD = 300f;
 
     public GameObject pauseBoard;
 
@@ -32,6 +33,25 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         isGameStart = false;
+        StartCoroutine(nameof(CAddScore));
+    }
+
+    private IEnumerator CAddScore()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.01f);
+            score += movingElementSpd / 100;
+            if (isGameStart == true)
+            {
+                if(Player.Instance.IsBooster == false && score <= 2000)
+                {
+                    movingElementSpd = STARTSPD + score / 5;
+                    Mathf.Clamp(movingElementSpd, 200f, 600f);
+                }
+            }
+
+        }
     }
 
     private void Update()
