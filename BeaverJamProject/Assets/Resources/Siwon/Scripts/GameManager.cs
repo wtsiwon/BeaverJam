@@ -49,11 +49,15 @@ public class GameManager : Singleton<GameManager>
 
         Spawner.Instance.Clear();
         spCoroutine = Spawner.Instance.StartCoroutine(nameof(Spawner.Instance.Spawn));
+        isGameStart = true;
+
     }
 
     public void GameOver()
     {
         StopCoroutine(spCoroutine);
         Spawner.Instance.Clear();
+        isGameStart = false;
+
     }
 }
