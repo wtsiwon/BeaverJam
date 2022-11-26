@@ -74,7 +74,6 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-
     public void StartSetting()
     {
         if (spCoroutine != null) StopCoroutine(spCoroutine);

@@ -61,7 +61,7 @@ public class Player : Singleton<Player>
     {
         if (GameManager.Instance.isGameStart == true)
         {
-            gauge += Time.deltaTime / 1.5f;
+            gauge += Time.deltaTime;
             if (gauge >= 100)
             {
                 gauge = 100;
