@@ -48,6 +48,9 @@ public class Player : Singleton<Player>
     [Tooltip("±√±ÿ±‚ ∞‘¿Ã¡ˆ")]
     private TextMeshProUGUI ultGaugeText;
 
+    public GameObject boosterEffect;
+    public TextMeshProUGUI burningBeaverText;
+
     private bool isBooster;
     public bool IsBooster
     {
@@ -55,12 +58,24 @@ public class Player : Singleton<Player>
         set
         {
             isBooster = value;
+            boosterEffect.SetActive(value);
+            burningBeaverText.gameObject.SetActive(value);
+
+            if (value == true) 
+            {
+               //Camera.main.transform.DOMoveX
+            }
+            else
+            {
+
+            }
+
         }
     }
 
     private void Start()
     {
-
+        
     }
 
     private void Update()
@@ -109,9 +124,18 @@ public class Player : Singleton<Player>
     private IEnumerator CUltimate()
     {
         IsBooster = true;
-        gauge = 0;
 
         yield return new WaitForSeconds(ultDuration);
+        gauge = 0;
         IsBooster = false;
+    }
+
+    private IEnumerator CCheck()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.5f);
+            print(IsBooster);
+        }
     }
 }

@@ -7,20 +7,27 @@ public class Obstacle : VerticalMove
     public bool isOneBlock;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("MapEndPos"))
+        string tag = other.tag;
+
+        switch (tag)
         {
-            Spawner.Instance.ObjPush(gameObject);
+            case "MapEndPos":
+                Spawner.Instance.ObjPush(gameObject);
+                break;
+            case "Player":
+                if (Player.Instance.IsBooster == false)
+                {
+                    GameManager.Instance.GameOver();
+                }
+                else
+                {
+                    GameManager.Instance.Score += 100;
+                }
+                break;
+            case "AddGauge":
+                Player.Instance.gauge += 5f;
+                break;
         }
-        if (other.CompareTag("Player"))
-        {
-            if (Player.Instance.IsBooster == false)
-            {
-                GameManager.Instance.GameOver();
-            }
-            else
-            {
-                GameManager.Instance.Score += 100;
-            }
-        }
+
     }
 }
