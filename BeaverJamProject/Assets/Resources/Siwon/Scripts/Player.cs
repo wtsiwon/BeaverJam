@@ -19,7 +19,7 @@ public class Player : Singleton<Player>
         set
         {
             posIndex = value;
-            transform.DOMove(pos[posIndex],0.2f);
+            transform.DOMove(pos[posIndex], 0.2f);
         }
     }
 
@@ -54,18 +54,26 @@ public class Player : Singleton<Player>
 
     private void Start()
     {
-        
+
     }
 
     private void Update()
     {
-        gauge += Time.deltaTime;
-        Mathf.Clamp(gauge, 0, 100);
+        if (GameManager.Instance.isGameStart == true)
+        {
+            gauge += Time.deltaTime / 1.5f;
+            if (gauge >= 100)
+            {
+                gauge = 100;
+            }
+        }
+
+        SetBooter();
 
         InputKey();
     }
 
-    
+
 
     private void InputKey()
     {
@@ -86,7 +94,7 @@ public class Player : Singleton<Player>
 
     private void SetBooter()
     {
-        if(IsBooster == true)
+        if (IsBooster == true)
         {
             GameManager.Instance.movingElementSpd = GameManager.Instance.boostingSpd;
         }
@@ -103,7 +111,6 @@ public class Player : Singleton<Player>
         gauge = 0;
 
         yield return new WaitForSeconds(ultDuration);
-
         IsBooster = false;
 
     }

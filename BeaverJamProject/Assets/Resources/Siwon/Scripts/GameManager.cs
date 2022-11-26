@@ -4,7 +4,19 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    public float score;
+    private float score;
+    public float Score
+    {
+        get
+        {
+            return score;
+        }
+        set
+        {
+            score = value;
+            UIManager.Instance.scoreText.text = score.ToString();
+        }
+    }
 
     public Coroutine spCoroutine;
     public bool isGameStart;
@@ -44,9 +56,9 @@ public class GameManager : Singleton<GameManager>
             score += movingElementSpd / 100;
             if (isGameStart == true)
             {
-                if(Player.Instance.IsBooster == false && score <= 2000)
+                if(Player.Instance.IsBooster == false && Score <= 2000)
                 {
-                    movingElementSpd = STARTSPD + score / 5;
+                    movingElementSpd = STARTSPD + Score / 5;
                     Mathf.Clamp(movingElementSpd, 200f, 600f);
                 }
             }
