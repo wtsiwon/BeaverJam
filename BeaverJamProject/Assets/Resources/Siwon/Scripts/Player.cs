@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
-
-public enum EPlayerStat
-{
-    None,
-    Booster,
-}
+using UnityEngine.UI;
 public class Player : Singleton<Player>
 {
+    [SerializeField] private Image gaugeImg;
+
     [SerializeField]
     private int posIndex;
     public int PosIndex
@@ -33,13 +30,14 @@ public class Player : Singleton<Player>
         set
         {
             _gauge = value;
+            gaugeImg.fillAmount = _gauge / 100;
             if (_gauge >= 100)
             {
                 ultGaugeText.text = "Ready";
             }
             else
             {
-                ultGaugeText.text = _gauge.ToString("F0");
+                ultGaugeText.text = _gauge.ToString("F0") + "%";
             }
         }
     }
@@ -89,7 +87,6 @@ public class Player : Singleton<Player>
         {
             PosIndex += 1;
         }
-
         if (Input.GetKeyDown(KeyCode.Space) && gauge > 99 && isBooster == false)
         {
             Ultimate();

@@ -5,6 +5,8 @@ using DG.Tweening;
 using TMPro;
 public class UIManager : Singleton<UIManager>
 {
+    [SerializeField] private GameManager gm = GameManager.Instance;
+
     [SerializeField] private TextMeshProUGUI fadeTxt;
     [SerializeField] private GameObject TitleWnd;
 
@@ -26,6 +28,9 @@ public class UIManager : Singleton<UIManager>
 
     
     public TextMeshProUGUI scoreText;
+
+    [SerializeField] private TextMeshProUGUI titleScoreTxt;
+    [SerializeField] private TextMeshProUGUI titleHighScoreTxt;
 
     void Start()
     {
@@ -50,6 +55,7 @@ public class UIManager : Singleton<UIManager>
         TitleWnd.SetActive(true);
         cameraObjs.transform.DOMove(startCameraPos, 0.5f);
         cameraObjs.transform.DORotate(new Vector3(45, 0, 0), 0.5f);
+        ScoreSet();
     }
     public void StartBtn()
     {
@@ -118,5 +124,13 @@ public class UIManager : Singleton<UIManager>
             Time.timeScale = 1;
         }
         pauseWnd.SetActive(isPause);
+    }
+
+    public void ScoreSet()
+    {
+        int Score = (int)GameManager.Instance.Score;
+        titleScoreTxt.text = Score.ToString();
+        if (Score > gm.HScore) gm.HScore = Score;
+        titleHighScoreTxt.text = gm.HScore.ToString();
     }
 }

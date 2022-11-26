@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Map : VerticalMove
 {
-    [SerializeField] private Transform startPos;
     private void OnTriggerEnter(Collider other)
     {
         

@@ -5,31 +5,22 @@ using UnityEngine;
 public class Obstacle : VerticalMove
 {
     public bool isOneBlock;
-    private void Broken()
-    {
-        // ºÎ¼ÅÁü
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("MapEndPos"))
         {
             Spawner.Instance.ObjPush(gameObject);
         }
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            //switch (ÇÃ·¹ÀÌ¾î »óÅÂ)
-            //{
-            //    case Basic:
-            //        Die
-            //        break;
-            //    defalut : 
-            //        Broken();
-            //        break;
-            //}
+            if (other.GetComponent<Player>().IsBooster == false)
+            {
+                GameManager.Instance.GameOver();
+            }
+            else
+            {
+                GameManager.Instance.Score += 100;
+            }
         }
     }
 }
