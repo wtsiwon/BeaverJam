@@ -8,6 +8,7 @@ public abstract class VeticalMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(GameManager.Instance.isGameStart)
         rb.transform.position += Vector3.back * Time.deltaTime;   
     }
 }
