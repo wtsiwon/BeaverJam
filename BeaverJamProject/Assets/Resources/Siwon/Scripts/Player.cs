@@ -117,11 +117,6 @@ public class Player : Singleton<Player>
         {
             Ultimate();
         }
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            Ultimate();
-        }
     }
 
     private void SetBooter()

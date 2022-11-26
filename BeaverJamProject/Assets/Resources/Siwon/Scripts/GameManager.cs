@@ -33,9 +33,14 @@ public class GameManager : Singleton<GameManager>
     public float boostingSpd;
 
     public const float STARTSPD = 300f;
-
+    private void OnApplicationQuit()
+    {
+        PlayerPrefs.SetFloat("HScore", hScore);
+    }
     private void Start()
     {
+        hScore = PlayerPrefs.GetFloat("HScore");
+
         isGameStart = false;
         StartCoroutine(nameof(CAddScore));
     }
@@ -68,9 +73,9 @@ public class GameManager : Singleton<GameManager>
 
     public void StartSetting()
     {
+        isGameStart = true;
         Spawner.Instance.Clear();
         StartCoroutine(Spawner.Instance.Spawn());
-        isGameStart = true;
         Score = 0;
         Player.Instance.gauge = 0;
         movingElementSpd = STARTSPD;
@@ -80,10 +85,10 @@ public class GameManager : Singleton<GameManager>
     public void GameOver()
     {
         SoundManager.Instance.PlaySound(ESoundType.DIE);
+        isGameStart = false;
 
         Spawner.Instance.StopSpawn();
         Spawner.Instance.Clear();
-        isGameStart = false;
         movingElementSpd = STARTSPD;
         UIManager.Instance.GoTitle();
     }

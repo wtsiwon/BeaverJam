@@ -70,31 +70,42 @@ public class Spawner : Singleton<Spawner>
         {
             int ranNum = Random.Range(0, oneBlock.Count);
 
-            if (oneBlock.Count != 0) obj = oneBlock[ranNum];
-            else obj = CreateObj(isOne, ranNum);
+            if (oneBlock.Count > 0) obj = oneBlock[ranNum];
+            else obj = CreateObj(isOne, 0);
+
             oneBlock.Remove(obj);
         }
         else
         {
             int ranNum = Random.Range(0, twoBlock.Count);
 
-            if (twoBlock.Count != 0) obj = twoBlock[ranNum];
-            else obj = CreateObj(isOne, ranNum);
+            if (twoBlock.Count > 0) obj = twoBlock[ranNum];
+            else obj = CreateObj(isOne, 1);
+
             twoBlock.Remove(obj);
             if(pos == spPos[0]) obj.transform.rotation = Quaternion.Euler(130,0,0);
             else obj.transform.rotation = Quaternion.Euler(-130,180,0);
         }
         spawnObjs.Add(obj);
 
+        obj.transform.position = pos.position;
         obj.SetActive(true);
         obj.transform.parent = null;
-        obj.transform.position = pos.position;
     }
     public void ObjPush(GameObject obstacle)
     {
         Obstacle obj = obstacle.GetComponent<Obstacle>();
-        if (obj.isOneBlock) oneBlock.Add(obj.gameObject);
+        if (obj.isOneBlock == true) oneBlock.Add(obj.gameObject);
         else twoBlock.Add(obj.gameObject);
+
+        foreach (var item in spawnObjs)
+        {
+            if (item == obstacle && GameManager.Instance.isGameStart)
+            {
+                spawnObjs.Remove(item);
+                break;
+            }
+        }
 
         obj.transform.parent = objFolder.transform;
         obj.transform.position = Vector3.zero;
@@ -107,6 +118,10 @@ public class Spawner : Singleton<Spawner>
     }
     public IEnumerator Spawn()
     {
+        if (GameManager.Instance.isGameStart == false)
+        {
+            yield break;
+        }
         //0ÀÏ¶§ 1Ä­ Àå¾Ö¹° , 1 ÀÏ¶§ 2Ä­ 
         int ran = Random.Range(0, 2);
         bool isOneBlock = (ran == 0)? true : false;
@@ -123,16 +138,16 @@ public class Spawner : Singleton<Spawner>
         }
         else ObjPop(isOneBlock, spPos[Random.Range(0,objs.Count)]);
         yield return new WaitForSeconds(maxCnt);
-        GameManager.Instance.spCoroutine = this.StartCoroutine(nameof(Spawn));
+        if(GameManager.Instance.isGameStart == true) GameManager.Instance.spCoroutine = this.StartCoroutine(nameof(Spawn));
     }
 
     public void Clear()
     {
         foreach (var item in spawnObjs)
         {
+            if (GameManager.Instance.isGameStart == true) break;
             ObjPush(item);
         }
-
         spawnObjs.Clear();
     }
 }

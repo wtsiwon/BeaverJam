@@ -39,6 +39,7 @@ public class UIManager : Singleton<UIManager>
 
         cameraObjs.transform.position = startCameraPos;
         fadeTxt.DOFade(0f, 0.8f).SetLoops(-1, LoopType.Yoyo);
+        titleHighScoreTxt.text = PlayerPrefs.GetFloat("HScore").ToString("F0");
     }
 
     public void GoTitle()
