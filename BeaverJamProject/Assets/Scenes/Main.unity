@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.30588257, g: 0.34153664, b: 0.41203952, a: 1}
+  m_IndirectSpecularColor: {r: 0.3053, g: 0.34102, b: 0.41209492, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -423,6 +423,18 @@ PrefabInstance:
     - target: {fileID: 298280471066737539, guid: 88b3f3347e217db4fb32b3552f5c1430, type: 3}
       propertyPath: m_Name
       value: Siwon
+      objectReference: {fileID: 0}
+    - target: {fileID: 958612462228539650, guid: 88b3f3347e217db4fb32b3552f5c1430, type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 958612462228539650, guid: 88b3f3347e217db4fb32b3552f5c1430, type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 958612462228539650, guid: 88b3f3347e217db4fb32b3552f5c1430, type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 3304917453495326413, guid: 88b3f3347e217db4fb32b3552f5c1430, type: 3}
       propertyPath: m_RootOrder

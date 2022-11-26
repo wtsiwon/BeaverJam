@@ -53,7 +53,7 @@ public class GameManager : Singleton<GameManager>
         while (true)
         {
             yield return new WaitForSeconds(0.01f);
-            score += movingElementSpd / 100;
+            Score += movingElementSpd / 100;
             if (isGameStart == true)
             {
                 if(Player.Instance.IsBooster == false && Score <= 2000)
