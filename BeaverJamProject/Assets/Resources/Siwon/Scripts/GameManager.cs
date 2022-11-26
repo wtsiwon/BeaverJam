@@ -14,7 +14,7 @@ public class GameManager : Singleton<GameManager>
         set
         {
             score = value;
-            UIManager.Instance.scoreText.text = score.ToString("F0");
+            UIManager.Instance.scoreText.text = "Score: " + score.ToString("F0");
         }
     }
     private float hScore;
@@ -32,7 +32,7 @@ public class GameManager : Singleton<GameManager>
     [Tooltip("ºÎ½ºÆÃ Spd")]
     public float boostingSpd;
 
-    public const float STARTSPD = 2000f;
+    public const float STARTSPD = 300f;
 
     private void Start()
     {
@@ -51,7 +51,7 @@ public class GameManager : Singleton<GameManager>
                 if(Player.Instance.IsBooster == false && Score <= 20000)
                 {
                     movingElementSpd = STARTSPD + Score / 5;
-                    Mathf.Clamp(movingElementSpd, 2000f, 6000f);
+                    Mathf.Clamp(movingElementSpd, 300f, 700f);
                 }
             }
 
@@ -72,6 +72,7 @@ public class GameManager : Singleton<GameManager>
         StartCoroutine(Spawner.Instance.Spawn());
         isGameStart = true;
         Score = 0;
+        Player.Instance.gauge = 0;
         movingElementSpd = STARTSPD;
 
     }
@@ -81,6 +82,7 @@ public class GameManager : Singleton<GameManager>
         Spawner.Instance.StopSpawn();
         Spawner.Instance.Clear();
         isGameStart = false;
+        movingElementSpd = STARTSPD;
         UIManager.Instance.GoTitle();
     }
 }
