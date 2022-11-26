@@ -23,6 +23,10 @@ public class UIManager : Singleton<UIManager>
     private bool isPause;
 
     [SerializeField] private GameObject ingameWnd;
+
+    
+    public TextMeshProUGUI scoreText;
+
     void Start()
     {
         isSetOn = false;
