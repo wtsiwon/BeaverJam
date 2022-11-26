@@ -13,7 +13,7 @@ public class Obstacle : VerticalMove
         }
         if (other.CompareTag("Player"))
         {
-            if (other.GetComponent<Player>().IsBooster == false)
+            if (Player.Instance.IsBooster == false)
             {
                 GameManager.Instance.GameOver();
             }
