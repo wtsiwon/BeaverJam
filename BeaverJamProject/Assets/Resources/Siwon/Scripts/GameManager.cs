@@ -79,6 +79,8 @@ public class GameManager : Singleton<GameManager>
 
     public void GameOver()
     {
+        SoundManager.Instance.PlaySound(ESoundType.DIE);
+
         Spawner.Instance.StopSpawn();
         Spawner.Instance.Clear();
         isGameStart = false;

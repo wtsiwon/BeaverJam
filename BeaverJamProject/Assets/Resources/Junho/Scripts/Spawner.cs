@@ -130,7 +130,6 @@ public class Spawner : Singleton<Spawner>
     {
         foreach (var item in spawnObjs)
         {
-            print(item);
             ObjPush(item);
         }
 

@@ -8,7 +8,8 @@ public enum ESoundType
     BGM,
     BUTTON,
     WATER,
-    SKILL
+    SKILL,
+    DIE
 }
 
 public class SoundManager : Singleton<SoundManager>
@@ -45,9 +46,10 @@ public class SoundManager : Singleton<SoundManager>
         {
             bgm = audio;
             audio.loop = true;
-            audio.volume = 0.5f;
+            audio.volume = 0.2f;
         }
         audio.Play();
-        if (type != ESoundType.BGM) Destroy(go, audio.clip.length);
+        if (type == ESoundType.WATER) Destroy(go, 0.5f);
+        else if (type != ESoundType.BGM) Destroy(go, audio.clip.length);
     }
 }
