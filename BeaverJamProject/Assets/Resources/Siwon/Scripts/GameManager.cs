@@ -68,10 +68,8 @@ public class GameManager : Singleton<GameManager>
 
     public void StartSetting()
     {
-        if (spCoroutine != null) StopCoroutine(nameof(Spawner.Instance.Spawn));
-
         Spawner.Instance.Clear();
-        spCoroutine = Spawner.Instance.StartCoroutine(nameof(Spawner.Instance.Spawn));
+        StartCoroutine(Spawner.Instance.Spawn());
         isGameStart = true;
         Score = 0;
         movingElementSpd = STARTSPD;
@@ -80,7 +78,7 @@ public class GameManager : Singleton<GameManager>
 
     public void GameOver()
     {
-        StopCoroutine(nameof(Spawner.Instance.Spawn));
+        Spawner.Instance.StopSpawn();
         Spawner.Instance.Clear();
         isGameStart = false;
         UIManager.Instance.GoTitle();

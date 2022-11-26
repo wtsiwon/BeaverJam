@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.30591077, g: 0.3413747, b: 0.41194752, a: 1}
+  m_IndirectSpecularColor: {r: 0.3061896, g: 0.3416067, b: 0.41182366, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -436,11 +436,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &923313277 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 197388110, guid: 1b5243e5f1e3e8241b64edf246fa7bce, type: 3}
-  m_PrefabInstance: {fileID: 3725015028699087596}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &944582365
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,7 +576,6 @@ MonoBehaviour:
   isGameStart: 0
   movingElementSpd: 0
   boostingSpd: 10000
-  pauseBoard: {fileID: 923313277}
 --- !u!4 &984233133
 Transform:
   m_ObjectHideFlags: 0
@@ -866,6 +860,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 1080
       objectReference: {fileID: 0}
+    - target: {fileID: 469600906, guid: 1b5243e5f1e3e8241b64edf246fa7bce, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 598806698, guid: 1b5243e5f1e3e8241b64edf246fa7bce, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -390
@@ -886,6 +884,10 @@ PrefabInstance:
       propertyPath: sm
       value: 
       objectReference: {fileID: 1551241666}
+    - target: {fileID: 760818851, guid: 1b5243e5f1e3e8241b64edf246fa7bce, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2246019950297506198, guid: 1b5243e5f1e3e8241b64edf246fa7bce, type: 3}
       propertyPath: m_RootOrder
       value: 0
