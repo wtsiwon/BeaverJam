@@ -10,7 +10,7 @@ public class Map : VeticalMove
         
         if (other.CompareTag("MapEndPos"))
         {
-            transform.position = startPos.position;
+            ScrollMap.Instance.NextMap(this.gameObject);
         }
     }
 }

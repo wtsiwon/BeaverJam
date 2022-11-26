@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScrollMap : MonoBehaviour
+public class ScrollMap : Singleton<ScrollMap>
 {
     [SerializeField] private Transform[] startPos;
-    [SerializeField] private GameObject[] mapObjs;
+    [SerializeField] private List <GameObject> mapObjs = new List<GameObject>();
     [SerializeField] float skyRotate;
 
     private void FixedUpdate()
@@ -18,21 +18,18 @@ public class ScrollMap : MonoBehaviour
 
         RenderSettings.skybox.SetFloat("_Rotation", skyRotate);
     }
-    private void Start()
-    {
-        for (int i = 0; i < mapObjs.Length; i++)
-        {
-            mapObjs[i].transform.position = startPos[i].position;
-        }
-        
-    }
-    public void StartSet()
-    {
-        for (int i = 0; i < mapObjs.Length; i++)
-        {
-            mapObjs[i].transform.position = startPos[i].position;
-        }
-    }
 
-
+    public void NextMap(GameObject nextMap)
+    {
+        nextMap.transform.position =  mapObjs[mapObjs.Count - 1].transform.position + new Vector3(0,0,10);
+        foreach (var item in mapObjs)
+        {
+            if (item == nextMap)
+            {
+                mapObjs.Remove(nextMap);
+                break;
+            }
+        }
+            mapObjs.Add(nextMap);
+    }
 }
