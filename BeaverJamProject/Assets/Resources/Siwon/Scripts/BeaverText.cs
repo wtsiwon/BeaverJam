@@ -15,6 +15,7 @@ public class BeaverText : MonoBehaviour
     private void Start()
     {
         img = GetComponent<Image>();
+        img.DOFade(0, 0.5f).SetLoops(-1, LoopType.Yoyo);
     }
 
     private IEnumerator RepeatFadeinout()

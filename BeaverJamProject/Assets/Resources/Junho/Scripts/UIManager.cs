@@ -10,8 +10,8 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private TextMeshProUGUI fadeTxt;
     [SerializeField] private GameObject TitleWnd;
 
-    [SerializeField] private Vector3 startCameraPos;
-    [SerializeField] private Vector3 inGameCameraPos;
+    public Vector3 startCameraPos;
+    public Vector3 inGameCameraPos;
     private GameObject cameraObjs => Camera.main.gameObject;
 
     [SerializeField] private GameObject setWnd;

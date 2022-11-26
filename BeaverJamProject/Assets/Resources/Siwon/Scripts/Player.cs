@@ -64,19 +64,27 @@ public class Player : Singleton<Player>
 
             if (value == true)
             {
-                //Camera.main.transform.DOMoveX
+
+                StartCoroutine(nameof(CCameraMove));
             }
             else
             {
 
+                Camera.main.transform.DOMoveZ(-7, 1);
             }
 
         }
     }
 
-    private void Start()
+    private IEnumerator CCameraMove()
     {
+        Camera.main.transform.DOMoveZ(-15, 0.5f);
+        Camera.main.transform.DOMoveX(0, 0.4f).OnComplete(() =>
+        {
+            Camera.main.transform.DOShakePosition(3, new Vector2(0.3f, 0.3f));
+        });
 
+        yield return null;
     }
 
     private void Update()
@@ -98,10 +106,12 @@ public class Player : Singleton<Player>
         if (Input.GetKeyDown(KeyCode.LeftArrow) && PosIndex != 0)
         {
             PosIndex -= 1;
+            SoundManager.Instance.PlaySound(ESoundType.WATER);
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow) && PosIndex != 2)
         {
             PosIndex += 1;
+            SoundManager.Instance.PlaySound(ESoundType.WATER);
         }
         if (Input.GetKeyDown(KeyCode.Space) && gauge > 99 && isBooster == false)
         {
@@ -124,6 +134,7 @@ public class Player : Singleton<Player>
 
     private void Ultimate()
     {
+        SoundManager.Instance.PlaySound(ESoundType.SKILL);
         StartCoroutine(nameof(CUltimate));
     }
 
