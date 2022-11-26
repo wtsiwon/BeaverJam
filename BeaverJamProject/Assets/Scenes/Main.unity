@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3053, g: 0.34102, b: 0.41209492, a: 1}
+  m_IndirectSpecularColor: {r: 0.30573922, g: 0.34133387, b: 0.41223082, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -344,7 +344,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGameStart: 0
   movingElementSpd: 0
-  boostingSpd: 1000
+  boostingSpd: 3000
   pauseBoard: {fileID: 923313277}
 --- !u!4 &984233133
 Transform:
@@ -416,6 +416,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1609332799, guid: 88b3f3347e217db4fb32b3552f5c1430, type: 3}
+      propertyPath: ultDuration
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1609332799, guid: 88b3f3347e217db4fb32b3552f5c1430, type: 3}
       propertyPath: ultGaugeText
       value: 
@@ -550,6 +554,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 193874535, guid: 1b5243e5f1e3e8241b64edf246fa7bce, type: 3}
+      propertyPath: maxCnt
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 638257497, guid: 1b5243e5f1e3e8241b64edf246fa7bce, type: 3}
       propertyPath: sm
       value: 

@@ -14,7 +14,7 @@ public class GameManager : Singleton<GameManager>
         set
         {
             score = value;
-            UIManager.Instance.scoreText.text = score.ToString();
+            UIManager.Instance.scoreText.text = score.ToString("F0");
         }
     }
 
@@ -53,7 +53,7 @@ public class GameManager : Singleton<GameManager>
         while (true)
         {
             yield return new WaitForSeconds(0.01f);
-            Score += movingElementSpd / 100;
+            Score += movingElementSpd / 1000;
             if (isGameStart == true)
             {
                 if(Player.Instance.IsBooster == false && Score <= 2000)

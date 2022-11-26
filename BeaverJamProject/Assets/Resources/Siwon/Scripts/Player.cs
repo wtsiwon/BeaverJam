@@ -25,6 +25,7 @@ public class Player : Singleton<Player>
 
     public Vector3[] pos;
 
+    [SerializeField]
     private float _gauge;
     public float gauge
     {
@@ -32,7 +33,14 @@ public class Player : Singleton<Player>
         set
         {
             _gauge = value;
-            ultGaugeText.text = _gauge.ToString("F0");
+            if (_gauge >= 100)
+            {
+                ultGaugeText.text = "Ready";
+            }
+            else
+            {
+                ultGaugeText.text = _gauge.ToString("F0");
+            }
         }
     }
 
@@ -62,10 +70,6 @@ public class Player : Singleton<Player>
         if (GameManager.Instance.isGameStart == true)
         {
             gauge += Time.deltaTime;
-            if (gauge >= 100)
-            {
-                gauge = 100;
-            }
         }
 
         SetBooter();
@@ -109,6 +113,18 @@ public class Player : Singleton<Player>
     {
         IsBooster = true;
         gauge = 0;
+
+        Camera.main.transform.DOMoveX(3, 2)
+                                  .OnComplete(() =>
+                                  {
+
+                                      Camera.main.transform.DOMoveX(0, 0.4f).OnComplete(() =>
+                                      {
+                                          Camera.main.transform.DOShakePosition(3, new Vector2(0.3f, 0.3f));
+                                      });
+
+
+                                  });
 
         yield return new WaitForSeconds(ultDuration);
         IsBooster = false;
