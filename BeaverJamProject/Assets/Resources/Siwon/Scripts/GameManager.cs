@@ -29,19 +29,6 @@ public class GameManager : Singleton<GameManager>
 
     public const float STARTSPD = 300f;
 
-    public GameObject pauseBoard;
-
-    private bool isPauseBoard;
-    public bool IsPauseBoard
-    {
-        get => isPauseBoard;
-        set
-        {
-            isPauseBoard = value;
-
-            pauseBoard.SetActive(isPauseBoard);
-        }
-    }
     private void Start()
     {
         isGameStart = false;
@@ -52,7 +39,7 @@ public class GameManager : Singleton<GameManager>
     {
         while (true)
         {
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.02f);
             Score += movingElementSpd / 1000;
             if (isGameStart == true)
             {
@@ -81,6 +68,8 @@ public class GameManager : Singleton<GameManager>
         Spawner.Instance.Clear();
         spCoroutine = Spawner.Instance.StartCoroutine(nameof(Spawner.Instance.Spawn));
         isGameStart = true;
+        Score = 0;
+        movingElementSpd = STARTSPD;
 
     }
 
