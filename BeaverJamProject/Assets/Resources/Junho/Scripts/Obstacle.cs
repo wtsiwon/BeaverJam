@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Obstacle : VeticalMove
+public class Obstacle : VerticalMove
 {
     public bool isOneBlock;
     private void Broken()
