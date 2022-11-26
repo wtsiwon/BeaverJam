@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
-public class Title : Singleton<Title>
+public class UIManager : Singleton<UIManager>
 {
     [SerializeField] private TextMeshProUGUI fadeTxt;
     [SerializeField] private GameObject TitleWnd;

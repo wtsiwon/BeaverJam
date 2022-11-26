@@ -58,7 +58,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Title.Instance.PauseOnBtn();
+            UIManager.Instance.PauseOnBtn();
         }
     }
 
@@ -78,6 +78,5 @@ public class GameManager : Singleton<GameManager>
         StopCoroutine(spCoroutine);
         Spawner.Instance.Clear();
         isGameStart = false;
-
     }
 }
