@@ -100,6 +100,11 @@ public class Spawner : Singleton<Spawner>
         obj.transform.position = Vector3.zero;
         obj.gameObject.SetActive(false);
     }
+
+    public void StopSpawn()
+    {
+        StopCoroutine(nameof(this.Spawn));
+    }
     public IEnumerator Spawn()
     {
         //0ÀÏ¶§ 1Ä­ Àå¾Ö¹° , 1 ÀÏ¶§ 2Ä­ 
@@ -118,13 +123,14 @@ public class Spawner : Singleton<Spawner>
         }
         else ObjPop(isOneBlock, spPos[Random.Range(0,objs.Count)]);
         yield return new WaitForSeconds(maxCnt);
-        GameManager.Instance.spCoroutine = this.StartCoroutine(nameof(Spawner.Instance.Spawn));
+        GameManager.Instance.spCoroutine = this.StartCoroutine(nameof(Spawn));
     }
 
     public void Clear()
     {
         foreach (var item in spawnObjs)
         {
+            print(item);
             ObjPush(item);
         }
 
