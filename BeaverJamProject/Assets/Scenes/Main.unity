@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.30558667, g: 0.34116638, b: 0.41166192, a: 1}
+  m_IndirectSpecularColor: {r: 0.30564615, g: 0.3413254, b: 0.41237622, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6459,7 +6459,7 @@ PrefabInstance:
       objectReference: {fileID: 591023438}
     - target: {fileID: 1609332799, guid: 88b3f3347e217db4fb32b3552f5c1430, type: 3}
       propertyPath: ultDuration
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1609332799, guid: 88b3f3347e217db4fb32b3552f5c1430, type: 3}
       propertyPath: ultGaugeText
@@ -6469,6 +6469,10 @@ PrefabInstance:
       propertyPath: boosterEffect
       value: 
       objectReference: {fileID: 1504354503}
+    - target: {fileID: 1609332799, guid: 88b3f3347e217db4fb32b3552f5c1430, type: 3}
+      propertyPath: boosterEffect2
+      value: 
+      objectReference: {fileID: 944582365}
     - target: {fileID: 1609332799, guid: 88b3f3347e217db4fb32b3552f5c1430, type: 3}
       propertyPath: burningBeaverText
       value: 

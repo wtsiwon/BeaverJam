@@ -50,7 +50,7 @@ public class Player : Singleton<Player>
 
     public GameObject boosterEffect;
     public TextMeshProUGUI burningBeaverText;
-
+    public GameObject boosterEffect2;
     private bool isBooster;
     public bool IsBooster
     {
@@ -59,11 +59,12 @@ public class Player : Singleton<Player>
         {
             isBooster = value;
             boosterEffect.SetActive(value);
+            boosterEffect2.SetActive(value);
             burningBeaverText.gameObject.SetActive(value);
 
-            if (value == true) 
+            if (value == true)
             {
-               //Camera.main.transform.DOMoveX
+                //Camera.main.transform.DOMoveX
             }
             else
             {
@@ -75,7 +76,7 @@ public class Player : Singleton<Player>
 
     private void Start()
     {
-        
+
     }
 
     private void Update()
@@ -103,6 +104,11 @@ public class Player : Singleton<Player>
             PosIndex += 1;
         }
         if (Input.GetKeyDown(KeyCode.Space) && gauge > 99 && isBooster == false)
+        {
+            Ultimate();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             Ultimate();
         }
