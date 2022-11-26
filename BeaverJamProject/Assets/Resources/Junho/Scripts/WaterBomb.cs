@@ -6,9 +6,9 @@ public class WaterBomb : VerticalMove
 {
     [SerializeField] private GameObject target;
     const float waterPosZ = -50;
-    protected override void Update()
+    protected override void FixedUpdate()
     {
-        base.Update();
+        base.FixedUpdate();
         if (rb.position.z <= waterPosZ)
         {
             rb.position = target.transform.position + new Vector3(0, 0, 45);

@@ -136,9 +136,4 @@ public class Spawner : Singleton<Spawner>
 
         spawnObjs.Clear();
     }
-
-    public void StopSpawn()
-    {
-        StopCoroutine(nameof(Spawn));
-    }
 }
