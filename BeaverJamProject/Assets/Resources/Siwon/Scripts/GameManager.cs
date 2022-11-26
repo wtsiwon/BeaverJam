@@ -20,14 +20,8 @@ public class GameManager : Singleton<GameManager>
     private float hScore;
     public float HScore
     {
-        get
-        {
-            return hScore;
-        }
-        set
-        {
-            hScore = value;
-        }
+        get { return hScore; }
+        set { hScore = value; }
     }
     public Coroutine spCoroutine;
     public bool isGameStart;

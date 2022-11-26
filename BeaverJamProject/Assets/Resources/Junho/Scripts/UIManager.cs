@@ -5,7 +5,7 @@ using DG.Tweening;
 using TMPro;
 public class UIManager : Singleton<UIManager>
 {
-    GameManager gm = GameManager.Instance;
+    [SerializeField] private GameManager gm = GameManager.Instance;
 
     [SerializeField] private TextMeshProUGUI fadeTxt;
     [SerializeField] private GameObject TitleWnd;
