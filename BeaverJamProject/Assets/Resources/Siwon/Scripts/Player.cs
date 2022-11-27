@@ -69,10 +69,7 @@ public class Player : Singleton<Player>
             }
             else
             {
-                if(GameManager.Instance.Score >= 4000)
-                {
-                    GameManager.Instance.movingElementSpd = 700f;
-                }
+                
                 Camera.main.transform.DOMoveZ(-7, 1);
             }
 

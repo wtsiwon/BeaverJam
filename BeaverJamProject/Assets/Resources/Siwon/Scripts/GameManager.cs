@@ -54,10 +54,13 @@ public class GameManager : Singleton<GameManager>
             Score += movingElementSpd / 1000;
             if (isGameStart == true)
             {
-                if(Player.Instance.IsBooster == false && Score <= 3000)
+                if (Player.Instance.IsBooster == false && Score <= 10000)
                 {
                     movingElementSpd = STARTSPD + Score / 5;
-                    Mathf.Clamp(movingElementSpd, 300f, 700f);
+                }
+                else if(Player.Instance.IsBooster == false && Score > 10000)
+                {
+                    movingElementSpd = 1500f;
                 }
             }
 
