@@ -14,6 +14,7 @@ public class GameManager : Singleton<GameManager>
         set
         {
             score = value;
+            if (score > 4000) Spawner.Instance.maxCnt = 1f;
             UIManager.Instance.scoreText.text = "Score: " + score.ToString("F0");
         }
     }
@@ -76,6 +77,7 @@ public class GameManager : Singleton<GameManager>
         isGameStart = true;
         Spawner.Instance.Clear();
         StartCoroutine(Spawner.Instance.Spawn());
+        Spawner.Instance.maxCnt = 2f;
         Score = 0;
         Player.Instance.gauge = 0;
         movingElementSpd = STARTSPD;
